@@ -22,6 +22,7 @@ namespace Minecraft_AFK_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -72,6 +73,20 @@ namespace Minecraft_AFK_GUI
             theme.SetBaseTheme(Theme.Light);
 
             paletteHelper.SetTheme(theme);
+        }
+
+        private void Get_Window(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //快捷键设置
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            Hotkey.Regist(this, HotkeyModifiers.MOD_ALT, Key.T, () =>
+            {
+                this.Close();
+            });
         }
     }
 }

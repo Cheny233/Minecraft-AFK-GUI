@@ -42,6 +42,22 @@
             Click="CloseClick">
             <materialDesign:PackIcon Kind="close" />
         </Button>
-        <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" Margin="734,197,12,-197" RenderTransformOrigin="0.995,0.498" IsChecked="True"  Checked="To_Dark_Mode" Unchecked="To_Light_Mode"/>
+        <ToggleButton 
+            Style="{StaticResource MaterialDesignSwitchToggleButton}" 
+            Margin="734,197,12,-197" 
+            RenderTransformOrigin="0.995,0.498" 
+            IsChecked="{Binding Mode_Botton}"  Checked="To_Dark_Mode" Unchecked="To_Light_Mode">
+
+        </ToggleButton>
+
+        <Button
+            Margin="10,40,680,358"
+            materialDesign:ButtonProgressAssist.IsIndeterminate="False"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+            materialDesign:ButtonProgressAssist.Value="-1"
+            Content="捕获窗口"
+            ToolTip="Get_Window_Button"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedButton}" Click="Get_Window"/>
     </Grid>
 </Window>
