@@ -14,7 +14,7 @@
         FontFamily="{materialDesign:MaterialDesignFont}"
         
         mc:Ignorable="d"
-        Title="Minecraft-AFK-GUI" Height="450" Width="800" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize">
+        Title="Minecraft-AFK-GUI" Height="600" Width="950" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize">
 
 
     <Grid Margin="10">
@@ -22,15 +22,13 @@
             <DropShadowEffect Color="Black" Direction="0" ShadowDepth="0" Opacity="0.7"  BlurRadius="10"/>
         </Grid.Effect>
 
-        <Border CornerRadius="10,10,10,10" Background="{DynamicResource MaterialDesignPaper}" Height="Auto">
-            <TextBlock TextWrapping="Wrap" Margin="672,403,45,11"><Run Language="zh-cn" Text="深色模式"/></TextBlock>
-        </Border>
-        <Border MouseMove="Drag_MouseMove" BorderThickness="0" BorderBrush="Gray" Margin="0,0,0,405" CornerRadius="10,10,0,0" Background="#FF52C7B8"/>
+        <Border CornerRadius="10,10,10,10" Background="{DynamicResource MaterialDesignPaper}" Height="Auto"/>
+        <Border MouseMove="Drag_MouseMove" BorderThickness="0" BorderBrush="Gray" Margin="0,0,0,540" CornerRadius="10,10,0,0" Background="#FF52C7B8"/>
 
         <Button
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-            ToolTip="MaterialDesignFloatingActionMiniLightButton" Margin="671,5,69,385"
+            ToolTip="MaterialDesignFloatingActionMiniLightButton" Margin="815,20,75,520"
             Click="MinClick">
             <materialDesign:PackIcon Kind="minus" />
         </Button>
@@ -38,26 +36,30 @@
         <Button
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-            ToolTip="MaterialDesignFloatingActionMiniLightButton" Margin="723,5,17,385"
+            Margin="868,20,22,520"
             Click="CloseClick">
             <materialDesign:PackIcon Kind="close" />
         </Button>
-        <ToggleButton 
-            Style="{StaticResource MaterialDesignSwitchToggleButton}" 
-            Margin="734,197,12,-197" 
-            RenderTransformOrigin="0.995,0.498" 
-            IsChecked="{Binding Mode_Botton}"  Checked="To_Dark_Mode" Unchecked="To_Light_Mode">
 
-        </ToggleButton>
+        <ToggleButton
+            materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=WeatherNight}"
+            Content="{materialDesign:PackIcon Kind=WhiteBalanceSunny}"
+            Style="{StaticResource MaterialDesignActionLightToggleButton}"
+            IsChecked="True" Checked="ToDarkMode" Unchecked="ToLightMode" Margin="872,518,26,30" RenderTransformOrigin="0.876,0.701"/>
 
+        <TextBox
+            IsEnabled="False"
+            VerticalAlignment="Top"
+            materialDesign:HintAssist.Hint="窗口名称（按下左侧按钮后，前往指定窗口按下______捕获窗口）"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="116,63,145,0" Height="48"
+            Text=""/>
         <Button
-            Margin="10,40,680,358"
             materialDesign:ButtonProgressAssist.IsIndeterminate="False"
             materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
             materialDesign:ButtonProgressAssist.Value="-1"
-            Content="捕获窗口"
-            ToolTip="Get_Window_Button"
+            Content="{materialDesign:PackIcon DotsHorizontal}"
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-            Style="{StaticResource MaterialDesignRaisedButton}" Click="Get_Window"/>
+            Style="{StaticResource MaterialDesignFloatingActionLightButton}" Margin="25,55,849,469" RenderTransformOrigin="0.704,1.034"
+            Click="GetWindow"/>
     </Grid>
 </Window>

@@ -12,6 +12,12 @@ namespace Minecraft_AFK_GUI
 {
     static class Hotkey
     {
+        const int WM_HOTKEY = 0x312;
+        static int keyid = 0;
+        static Dictionary<int, HotKeyCallBackHanlder> keymap = new Dictionary<int, HotKeyCallBackHanlder>();
+
+        public delegate void HotKeyCallBackHanlder();
+
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool RegisterHotKey(IntPtr hWnd, int id, HotkeyModifiers fsModifiers, uint vk);
@@ -20,21 +26,36 @@ namespace Minecraft_AFK_GUI
         static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
         //注册快捷键
-        public static void Regist(Window window, HotkeyModifiers fsModifiers, Key key, HotKeyCallBackHanlder callBack)
+        public static void Regist(IntPtr hWnd, HotkeyModifiers fsModifiers, Key key, HotKeyCallBackHanlder callBack)
         {
-            var hwnd = new WindowInteropHelper(window).Handle;
-            var _hwndSource = HwndSource.FromHwnd(hwnd);
+            var _hwndSource = HwndSource.FromHwnd(hWnd);
             _hwndSource.AddHook(WndProc);
 
+            var vk = (uint)KeyInterop.VirtualKeyFromKey(key);
             int id = keyid++;
-
-            var vk = KeyInterop.VirtualKeyFromKey(key);
-            if (!RegisterHotKey(hwnd, id, fsModifiers, (uint)vk))
-                throw new Exception("regist hotkey fail.");
+            if (!RegisterHotKey(hWnd, id, fsModifiers, vk))
+            {
+                //报错 1409为热键冲突
+                //if (Marshal.GetLastWin32Error() == 1409)
+                    MessageBox.Show("Error!");
+            }
             keymap[id] = callBack;
         }
 
-        //快捷键消息
+        //注销快捷键消息
+        public static void UnRegist(IntPtr hWnd, HotKeyCallBackHanlder callBack)
+        {
+            foreach (KeyValuePair<int, HotKeyCallBackHanlder> var in keymap)
+            {
+                if (var.Value == callBack)
+                {
+                    UnregisterHotKey(hWnd, var.Key);
+                    return;
+                }
+            }
+        }
+
+        //快捷键消息处理
         static IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             if (msg == WM_HOTKEY)
@@ -47,22 +68,6 @@ namespace Minecraft_AFK_GUI
             }
             return IntPtr.Zero;
         }
-
-        //注销快捷键
-        public static void UnRegist(IntPtr hWnd, HotKeyCallBackHanlder callBack)
-        {
-            foreach (KeyValuePair<int, HotKeyCallBackHanlder> var in keymap)
-            {
-                if (var.Value == callBack)
-                    UnregisterHotKey(hWnd, var.Key);
-            }
-        }
-
-        const int WM_HOTKEY = 0x312;
-        static int keyid = 10;
-        static Dictionary<int, HotKeyCallBackHanlder> keymap = new Dictionary<int, HotKeyCallBackHanlder>();
-
-        public delegate void HotKeyCallBackHanlder();
     }
 
     enum HotkeyModifiers

@@ -12,8 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 using MaterialDesignColors;
 using MaterialDesignThemes.Wpf;
+using System.Windows.Interop;
+using System.Globalization;
 
 namespace Minecraft_AFK_GUI
 {
@@ -29,7 +32,7 @@ namespace Minecraft_AFK_GUI
         }
 
         //鼠标拖动窗口
-        private void Drag_MouseMove(object sender, MouseEventArgs e)
+        private void Drag_MouseMove(object sender, MouseEventArgs e = null)
         {
             try
             {
@@ -54,7 +57,7 @@ namespace Minecraft_AFK_GUI
         }
 
         //切换至深色模式
-        private void To_Dark_Mode(object sender, RoutedEventArgs e)
+        private void ToDarkMode(object sender, RoutedEventArgs e)
         {
             var paletteHelper = new PaletteHelper();
 
@@ -65,7 +68,7 @@ namespace Minecraft_AFK_GUI
         }
 
         //切换至浅色模式
-        private void To_Light_Mode(object sender, RoutedEventArgs e)
+        private void ToLightMode(object sender, RoutedEventArgs e)
         {
             var paletteHelper = new PaletteHelper();
             
@@ -75,18 +78,31 @@ namespace Minecraft_AFK_GUI
             paletteHelper.SetTheme(theme);
         }
 
-        private void Get_Window(object sender, RoutedEventArgs e)
+        private void GetWindow(object sender, RoutedEventArgs e)
         {
 
         }
 
         //快捷键设置
+        public void HotKeyRegist()
+        {
+            //WindowInteropHelper wndHelp = new WindowInteropHelper(this);
+            //Hotkey.RegisterHotKey(wndHelp.Handle, 100, HotkeyModifiers.MOD_ALT, Key.T);
+        }
+
+        public void close()
+        {
+            ToLightMode(this, null);
+        }
+
         protected override void OnSourceInitialized(EventArgs e)
         {
-            Hotkey.Regist(this, HotkeyModifiers.MOD_ALT, Key.T, () =>
-            {
-                this.Close();
-            });
+            base.OnSourceInitialized(e);
+
+            WindowInteropHelper wndHelp = new WindowInteropHelper(this);
+            Hotkey.Regist(wndHelp.Handle, HotkeyModifiers.MOD_ALT, Key.T,close);
+            //Hotkey.Regist(wndHelp.Handle, HotkeyModifiers.MOD_ALT, Key.T, HotKeyRegist);
+            //Hotkey.UnRegist(wndHelp.Handle,close);
         }
     }
 }
