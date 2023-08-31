@@ -25,14 +25,16 @@ namespace Minecraft_AFK_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        Settings set = new Settings();
 
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = set;
         }
 
         //鼠标拖动窗口
-        private void Drag_MouseMove(object sender, MouseEventArgs e = null)
+        private void Drag_MouseMove(object sender, MouseEventArgs e)
         {
             try
             {
@@ -78,29 +80,18 @@ namespace Minecraft_AFK_GUI
             paletteHelper.SetTheme(theme);
         }
 
-        private void GetWindow(object sender, RoutedEventArgs e)
+        private void WindowHandleButton(object sender, RoutedEventArgs e)
         {
-
+            GetWindowHandle();
+            MessageBox.Show(this.set.WindowHandleButtonState);
         }
-
-        //快捷键设置
-        public void HotKeyRegist()
-        {
-            //WindowInteropHelper wndHelp = new WindowInteropHelper(this);
-            //Hotkey.RegisterHotKey(wndHelp.Handle, 100, HotkeyModifiers.MOD_ALT, Key.T);
-        }
-
-        public void close()
-        {
-            ToLightMode(this, null);
-        }
-
+        
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
 
             WindowInteropHelper wndHelp = new WindowInteropHelper(this);
-            Hotkey.Regist(wndHelp.Handle, HotkeyModifiers.MOD_ALT, Key.T,close);
+            //Hotkey.Regist(wndHelp.Handle, HotkeyModifiers.MOD_ALT, Key.Escape,close);
             //Hotkey.Regist(wndHelp.Handle, HotkeyModifiers.MOD_ALT, Key.T, HotKeyRegist);
             //Hotkey.UnRegist(wndHelp.Handle,close);
         }

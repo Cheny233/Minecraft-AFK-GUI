@@ -54,12 +54,12 @@
             Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="116,63,145,0" Height="48"
             Text=""/>
         <Button
-            materialDesign:ButtonProgressAssist.IsIndeterminate="False"
+            materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding WindowHandleButtonState}"
             materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
             materialDesign:ButtonProgressAssist.Value="-1"
             Content="{materialDesign:PackIcon DotsHorizontal}"
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
             Style="{StaticResource MaterialDesignFloatingActionLightButton}" Margin="25,55,849,469" RenderTransformOrigin="0.704,1.034"
-            Click="GetWindow"/>
+            Click="WindowHandleButton"/>
     </Grid>
 </Window>
