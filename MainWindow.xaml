@@ -21,7 +21,6 @@
         <Grid.Effect>
             <DropShadowEffect Color="Black" Direction="0" ShadowDepth="0" Opacity="0.7"  BlurRadius="10"/>
         </Grid.Effect>
-
         <Border CornerRadius="10,10,10,10" Background="{DynamicResource MaterialDesignPaper}" Height="Auto"/>
         <Border MouseMove="Drag_MouseMove" BorderThickness="0" BorderBrush="Gray" Margin="0,0,0,540" CornerRadius="10,10,0,0" Background="#FF52C7B8"/>
 
@@ -45,22 +44,58 @@
             materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=WeatherNight}"
             Content="{materialDesign:PackIcon Kind=WhiteBalanceSunny}"
             Style="{StaticResource MaterialDesignActionLightToggleButton}"
-            IsChecked="True" Checked="ToDarkMode" Unchecked="ToLightMode" Margin="872,518,26,30" RenderTransformOrigin="0.876,0.701"/>
+            IsChecked="True" Checked="ToDarkMode" Unchecked="ToLightMode" Margin="872,518,26,30" RenderTransformOrigin="0.876,0.701"
+            ToolTip="深色/浅色模式" ToolTipService.InitialShowDelay="300"/>
 
         <TextBox
             IsEnabled="False"
             MaxLength="50"
             VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="窗口名称（按下左侧按钮后，前往指定窗口按下Alt+M捕获窗口）"
+            materialDesign:HintAssist.Hint="窗口名称（按下左侧按钮后，前往指定窗口按下 Ctrl + M 捕获窗口）"
             Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="116,63,145,0" Height="48"
             Text="{Binding WindowTitleName}"/>
+
         <Button
             materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding WindowHandleButtonState}"
             materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
             materialDesign:ButtonProgressAssist.Value="-1"
-            Content="{materialDesign:PackIcon DotsHorizontal}"
+            Content="{materialDesign:PackIcon Kind=DockWindow, Size=25}"
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
             Style="{StaticResource MaterialDesignFloatingActionLightButton}" Margin="25,55,849,469" RenderTransformOrigin="0.704,1.034"
-            Click="WindowHandleButton"/>
+            Click="WindowHandleButton"
+            ToolTip="按我开始捕获窗口" ToolTipService.InitialShowDelay="300"/>
+
+        <DataGrid
+            IsReadOnly="True"
+            CanUserAddRows="True"
+            ItemsSource="{Binding Items2}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" Margin="28,126,32,82">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                    
+                    <DataGridCheckBoxColumn.Header>
+                        <Border Background="Transparent">
+                            <CheckBox
+                                IsChecked="{Binding DataContext.IsAllItems1Selected}"/>
+                        </Border>
+                    </DataGridCheckBoxColumn.Header>
+
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style
+                            TargetType="{x:Type DataGridColumnHeader}"
+                            BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter
+                                Property="HorizontalContentAlignment"
+                                Value="Center" />
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+
+                <DataGridTextColumn
+                    Binding="{Binding Code}"
+                    Header="操作模式" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

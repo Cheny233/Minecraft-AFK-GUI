@@ -36,7 +36,7 @@ namespace Minecraft_AFK_GUI
             if (!RegisterHotKey(hWnd, id, fsModifiers, vk))
             {
                 //报错
-                Console.WriteLine("Error!");
+                //Console.WriteLine("Error!");
             }
             keymap[id] = callBack;
         }

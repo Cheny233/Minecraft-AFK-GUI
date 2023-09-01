@@ -87,9 +87,9 @@ namespace Minecraft_AFK_GUI
         {
             this.set.WindowHandleButtonState = "True";
             this.set.WindowTitleName = "";
-            TargetWindowHandle = new IntPtr();
+            TargetWindowHandle = IntPtr.Zero;
 
-            Hotkey.Regist(SelfWindowHandle, HotkeyModifiers.MOD_ALT | HotkeyModifiers.MOD_NOREPEAT, Key.M, GetWindowHandle);
+            Hotkey.Regist(SelfWindowHandle, HotkeyModifiers.MOD_CONTROL | HotkeyModifiers.MOD_NOREPEAT, Key.M, GetWindowHandle);
         }
         
         //测试快捷键注册

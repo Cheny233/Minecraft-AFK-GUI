@@ -24,12 +24,17 @@ namespace Minecraft_AFK_GUI
 
             TargetWindowHandle = GetForegroundWindow();
 
+            if (TargetWindowHandle == IntPtr.Zero)
+            {
+                this.set.WindowTitleName = "捕获失败！请重试！";
+                return;
+            }
+
             StringBuilder text = new StringBuilder();
             GetWindowText(TargetWindowHandle, text, 51);
             this.set.WindowTitleName = text.ToString();
 
             this.set.WindowHandleButtonState = "False";
         }
-        
     }
 }
