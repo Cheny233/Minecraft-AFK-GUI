@@ -35,9 +35,8 @@ namespace Minecraft_AFK_GUI
             int id = keyid++;
             if (!RegisterHotKey(hWnd, id, fsModifiers, vk))
             {
-                //报错 1409为热键冲突
-                //if (Marshal.GetLastWin32Error() == 1409)
-                    MessageBox.Show("Error!");
+                //报错
+                Console.WriteLine("Error!");
             }
             keymap[id] = callBack;
         }
@@ -72,9 +71,10 @@ namespace Minecraft_AFK_GUI
 
     enum HotkeyModifiers
     {
-        MOD_ALT = 0x1,
-        MOD_CONTROL = 0x2,
-        MOD_SHIFT = 0x4,
-        MOD_WIN = 0x8
+        MOD_ALT = 0x0001,
+        MOD_CONTROL = 0x0002,
+        MOD_SHIFT = 0x0004,
+        MOD_WIN = 0x0008,
+        MOD_NOREPEAT = 0x4000
     }
 }

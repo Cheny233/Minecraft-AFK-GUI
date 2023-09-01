@@ -27,6 +27,8 @@ namespace Minecraft_AFK_GUI
     {
         Settings set = new Settings();
 
+        IntPtr SelfWindowHandle, TargetWindowHandle;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,13 +49,13 @@ namespace Minecraft_AFK_GUI
         }
 
         //最小化窗口
-        private void MinClick(object sender, RoutedEventArgs e)
+        private void MinimizeWindow(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
 
         //关闭窗口
-        private void CloseClick(object sender, RoutedEventArgs e)
+        private void CloseWindow(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -80,18 +82,24 @@ namespace Minecraft_AFK_GUI
             paletteHelper.SetTheme(theme);
         }
 
+        //获取窗口句柄
         private void WindowHandleButton(object sender, RoutedEventArgs e)
         {
-            GetWindowHandle();
-            MessageBox.Show(this.set.WindowHandleButtonState);
+            this.set.WindowHandleButtonState = "True";
+            this.set.WindowTitleName = "";
+            TargetWindowHandle = new IntPtr();
+
+            Hotkey.Regist(SelfWindowHandle, HotkeyModifiers.MOD_ALT | HotkeyModifiers.MOD_NOREPEAT, Key.M, GetWindowHandle);
         }
         
+        //测试快捷键注册
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
 
             WindowInteropHelper wndHelp = new WindowInteropHelper(this);
-            //Hotkey.Regist(wndHelp.Handle, HotkeyModifiers.MOD_ALT, Key.Escape,close);
+            SelfWindowHandle = wndHelp.Handle;
+            //Hotkey.Regist(wndHelp.Handle, HotkeyModifiers.MOD_ALT, Key.T,GetWindowHandle);
             //Hotkey.Regist(wndHelp.Handle, HotkeyModifiers.MOD_ALT, Key.T, HotKeyRegist);
             //Hotkey.UnRegist(wndHelp.Handle,close);
         }

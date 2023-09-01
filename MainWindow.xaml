@@ -29,7 +29,7 @@
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
             ToolTip="MaterialDesignFloatingActionMiniLightButton" Margin="815,20,75,520"
-            Click="MinClick">
+            Click="MinimizeWindow">
             <materialDesign:PackIcon Kind="minus" />
         </Button>
 
@@ -37,7 +37,7 @@
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
             Margin="868,20,22,520"
-            Click="CloseClick">
+            Click="CloseWindow">
             <materialDesign:PackIcon Kind="close" />
         </Button>
 
@@ -49,10 +49,11 @@
 
         <TextBox
             IsEnabled="False"
+            MaxLength="50"
             VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="窗口名称（按下左侧按钮后，前往指定窗口按下______捕获窗口）"
+            materialDesign:HintAssist.Hint="窗口名称（按下左侧按钮后，前往指定窗口按下Alt+M捕获窗口）"
             Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="116,63,145,0" Height="48"
-            Text=""/>
+            Text="{Binding WindowTitleName}"/>
         <Button
             materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding WindowHandleButtonState}"
             materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"

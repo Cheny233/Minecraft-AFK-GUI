@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,9 +12,24 @@ namespace Minecraft_AFK_GUI
 {
     public partial class MainWindow : Window
     {
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        public static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int nMaxCount);
+
         private void GetWindowHandle()
         {
-            this.set.WindowHandleButtonState = "True";
+            Hotkey.UnRegist(SelfWindowHandle, GetWindowHandle);
+
+            TargetWindowHandle = GetForegroundWindow();
+
+            StringBuilder text = new StringBuilder();
+            GetWindowText(TargetWindowHandle, text, 51);
+            this.set.WindowTitleName = text.ToString();
+
+            this.set.WindowHandleButtonState = "False";
         }
+        
     }
 }
