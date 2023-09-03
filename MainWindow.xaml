@@ -11,10 +11,9 @@
         Background="{x:Null}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
-        FontFamily="{materialDesign:MaterialDesignFont}"
         
         mc:Ignorable="d"
-        Title="Minecraft-AFK-GUI" Height="600" Width="950" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize">
+        Title="Minecraft-AFK-GUI" Height="600" Width="950" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" FontWeight="Bold">
 
 
     <Grid Margin="10">
@@ -27,14 +26,16 @@
         <Button
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-            ToolTip="MaterialDesignFloatingActionMiniLightButton" Margin="815,20,75,520"
-            Click="MinimizeWindow">
-            <materialDesign:PackIcon Kind="minus" />
+            ToolTip="最小化" ToolTipService.InitialShowDelay="300"
+            Margin="815,20,75,520"
+            Click="MinimizeWindow" FontWeight="Normal">
+            <materialDesign:PackIcon Kind="minus"/>
         </Button>
 
         <Button
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+            ToolTip="关闭" ToolTipService.InitialShowDelay="300"
             Margin="868,20,22,520"
             Click="CloseWindow">
             <materialDesign:PackIcon Kind="close" />
@@ -52,12 +53,13 @@
             MaxLength="50"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="窗口名称（按下左侧按钮后，前往指定窗口按下 Ctrl + M 捕获窗口）"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="116,63,145,0" Height="48"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="116,63,136,0"
             Text="{Binding WindowTitleName}"/>
 
         <Button
             materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding WindowHandleButtonState}"
             materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+            materialDesign:ButtonProgressAssist.IndicatorForeground="#FF5D8D"
             materialDesign:ButtonProgressAssist.Value="-1"
             Content="{materialDesign:PackIcon Kind=DockWindow, Size=25}"
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
@@ -65,23 +67,27 @@
             Click="WindowHandleButton"
             ToolTip="按我开始捕获窗口" ToolTipService.InitialShowDelay="300"/>
 
-        <DataGrid
+        <DataGrid 
+            Name="OperationPage"
             IsReadOnly="True"
-            CanUserAddRows="True"
-            ItemsSource="{Binding Items2}"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
             SelectionMode="Extended"
-            SelectionUnit="Cell" Margin="28,126,32,82">
+            SelectionUnit="Cell" Margin="28,130,32,89">
+
+
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
-                    
+                <DataGridCheckBoxColumn
+                    IsReadOnly="False">
                     <DataGridCheckBoxColumn.Header>
                         <Border Background="Transparent">
                             <CheckBox
-                                IsChecked="{Binding DataContext.IsAllItems1Selected}"/>
+                                IsChecked="{Binding IsAllSelected}"/>
                         </Border>
                     </DataGridCheckBoxColumn.Header>
 
                     <DataGridCheckBoxColumn.HeaderStyle>
+                        
                         <Style
                             TargetType="{x:Type DataGridColumnHeader}"
                             BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
@@ -93,8 +99,32 @@
                 </DataGridCheckBoxColumn>
 
                 <DataGridTextColumn
-                    Binding="{Binding Code}"
-                    Header="操作模式" />
+                    Binding="{Binding Number}"
+                    Header="序号"/>
+
+                <DataGridTextColumn
+                    Binding="{Binding OperationMode}"
+                    Header="操作模式"/>
+
+                <DataGridTextColumn
+                    Binding="{Binding KeySelection}"
+                    Header="按键选择" />
+
+                <DataGridTextColumn
+                    Binding="{Binding Speed}"
+                    Header="点击速度（秒）" />
+
+                <DataGridTextColumn
+                    Binding="{Binding StartTime}"
+                    Header="开始时间（秒）" />
+
+                <DataGridTextColumn
+                    Binding="{Binding Duration}"
+                    Header="持续时间（秒）" />
+
+                <DataGridTextColumn
+                    Binding="{Binding RestartTime}"
+                    Header="重新开始时间（秒）" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

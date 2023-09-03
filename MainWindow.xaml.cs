@@ -33,6 +33,8 @@ namespace Minecraft_AFK_GUI
         {
             InitializeComponent();
             this.DataContext = set;
+
+            OperationPage.ItemsSource = set.Source;
         }
 
         //鼠标拖动窗口
@@ -89,9 +91,13 @@ namespace Minecraft_AFK_GUI
             this.set.WindowTitleName = "";
             TargetWindowHandle = IntPtr.Zero;
 
+            //test
+            OperationPageSource a =(new OperationPageSource());
+            set.Source.Add(a);
+
             Hotkey.Regist(SelfWindowHandle, HotkeyModifiers.MOD_CONTROL | HotkeyModifiers.MOD_NOREPEAT, Key.M, GetWindowHandle);
         }
-        
+
         //测试快捷键注册
         protected override void OnSourceInitialized(EventArgs e)
         {

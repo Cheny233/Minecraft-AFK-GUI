@@ -31,7 +31,7 @@ namespace Minecraft_AFK_GUI
             }
 
             StringBuilder text = new StringBuilder();
-            GetWindowText(TargetWindowHandle, text, 51);
+            GetWindowText(TargetWindowHandle, text, 45);
             this.set.WindowTitleName = text.ToString();
 
             this.set.WindowHandleButtonState = "False";
