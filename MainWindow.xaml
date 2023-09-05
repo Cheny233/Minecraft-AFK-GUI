@@ -15,7 +15,6 @@
         mc:Ignorable="d"
         Title="Minecraft-AFK-GUI" Height="600" Width="950" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" FontWeight="Bold">
 
-
     <Grid Margin="10">
         <Grid.Effect>
             <DropShadowEffect Color="Black" Direction="0" ShadowDepth="0" Opacity="0.7"  BlurRadius="10"/>
@@ -67,65 +66,62 @@
             Click="WindowHandleButton"
             ToolTip="按我开始捕获窗口" ToolTipService.InitialShowDelay="300"/>
 
-        <DataGrid 
+        <ListView
+            ItemContainerStyle="{StaticResource ListViewItemOverride}"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            Grid.Row="0" Grid.Column="0"
             Name="OperationPage"
-            IsReadOnly="True"
-            AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            SelectionMode="Extended"
-            SelectionUnit="Cell" Margin="28,130,32,89">
+            SelectionMode="Extended" Margin="48,124,48,163">
 
+            <ListView.View>
+                <GridView>
 
-            <DataGrid.Columns>
-                <DataGridCheckBoxColumn
-                    IsReadOnly="False">
-                    <DataGridCheckBoxColumn.Header>
-                        <Border Background="Transparent">
-                            <CheckBox
-                                IsChecked="{Binding IsAllSelected}"/>
-                        </Border>
-                    </DataGridCheckBoxColumn.Header>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding OperationMode}"
+                        Header="操作模式"/>
 
-                    <DataGridCheckBoxColumn.HeaderStyle>
-                        
-                        <Style
-                            TargetType="{x:Type DataGridColumnHeader}"
-                            BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                            <Setter
-                                Property="HorizontalContentAlignment"
-                                Value="Center" />
-                        </Style>
-                    </DataGridCheckBoxColumn.HeaderStyle>
-                </DataGridCheckBoxColumn>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding KeySelection}"
+                        Header="按键选择" />
 
-                <DataGridTextColumn
-                    Binding="{Binding Number}"
-                    Header="序号"/>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Speed}"
+                        Header="点击速度（秒）" />
 
-                <DataGridTextColumn
-                    Binding="{Binding OperationMode}"
-                    Header="操作模式"/>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding StartTime}"
+                        Header="开始时间（秒）" />
 
-                <DataGridTextColumn
-                    Binding="{Binding KeySelection}"
-                    Header="按键选择" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Duration}"
+                        Header="持续时间（秒）" />
 
-                <DataGridTextColumn
-                    Binding="{Binding Speed}"
-                    Header="点击速度（秒）" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding RestartTime}"
+                        Header="重新开始时间（秒）" />
 
-                <DataGridTextColumn
-                    Binding="{Binding StartTime}"
-                    Header="开始时间（秒）" />
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Style="{StaticResource MaterialDesignPaperButton}"
+                                    Content="编辑"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
-                <DataGridTextColumn
-                    Binding="{Binding Duration}"
-                    Header="持续时间（秒）" />
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Style="{StaticResource MaterialDesignPaperLightButton}"
+                                    Content="删除"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
-                <DataGridTextColumn
-                    Binding="{Binding RestartTime}"
-                    Header="重新开始时间（秒）" />
-            </DataGrid.Columns>
-        </DataGrid>
     </Grid>
 </Window>

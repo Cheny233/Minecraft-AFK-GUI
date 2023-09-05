@@ -64,8 +64,10 @@ namespace Minecraft_AFK_GUI
     {
         public OperationPageSource()
         {
+            //test
             Number = 1;
-            OperationMode = KeySelection = Speed = StartTime = Duration = RestartTime = "1";
+            OperationMode = "阿巴阿巴";
+            KeySelection = Speed = StartTime = Duration = RestartTime = "30.213";
             IsAllSelected = "True";
         }
 
