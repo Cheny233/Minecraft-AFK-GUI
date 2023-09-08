@@ -3,7 +3,7 @@
                     xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf">
 
     <Style BasedOn="{StaticResource MaterialDesignListView}" TargetType="{x:Type ListView}">
-        <Setter Property="materialDesign:DataGridAssist.ColumnHeaderPadding" Value="7" />
+        <Setter Property="materialDesign:DataGridAssist.ColumnHeaderPadding" Value="7,7,7,5" />
     </Style>
 
     <Style x:Key="ListViewItemOverride"

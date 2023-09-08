@@ -21,10 +21,6 @@ namespace Minecraft_AFK_GUI
             _WindowHandleButtonState = "False";
             //Source = new List<OperationPageSource>();
             Source = new ObservableCollection<OperationPageSource>();
-
-            //test
-            OperationPageSource a = new OperationPageSource();
-            Source.Add(a);
         }
 
         public string WindowTitleName
@@ -67,7 +63,7 @@ namespace Minecraft_AFK_GUI
             //test
             Number = 1;
             OperationMode = "阿巴阿巴";
-            KeySelection = Speed = StartTime = Duration = RestartTime = "30.213";
+            KeySelection = Speed = StartTime = Duration = RestartTime = "23333333333";
             IsAllSelected = "True";
         }
 

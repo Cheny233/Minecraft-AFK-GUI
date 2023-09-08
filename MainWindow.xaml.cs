@@ -91,10 +91,6 @@ namespace Minecraft_AFK_GUI
             this.set.WindowTitleName = "";
             TargetWindowHandle = IntPtr.Zero;
 
-            //test
-            OperationPageSource a =(new OperationPageSource());
-            set.Source.Add(a);
-
             Hotkey.Regist(SelfWindowHandle, HotkeyModifiers.MOD_CONTROL | HotkeyModifiers.MOD_NOREPEAT, Key.M, GetWindowHandle);
         }
 

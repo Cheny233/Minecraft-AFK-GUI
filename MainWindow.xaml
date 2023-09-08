@@ -27,7 +27,7 @@
             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
             ToolTip="最小化" ToolTipService.InitialShowDelay="300"
             Margin="815,20,75,520"
-            Click="MinimizeWindow" FontWeight="Normal">
+            Click="MinimizeWindow">
             <materialDesign:PackIcon Kind="minus"/>
         </Button>
 
@@ -71,7 +71,7 @@
             ScrollViewer.HorizontalScrollBarVisibility="Hidden"
             Grid.Row="0" Grid.Column="0"
             Name="OperationPage"
-            SelectionMode="Extended" Margin="48,124,48,163">
+            SelectionMode="Extended" Margin="48,130,42,140" d:ItemsSource="{d:SampleData ItemCount=5}">
 
             <ListView.View>
                 <GridView>
@@ -101,27 +101,142 @@
                         Header="重新开始时间（秒）" />
 
                     <GridViewColumn>
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+
+                                    <TextBlock Text="     "/>
+
+                                    <Button
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                        Style="{StaticResource MaterialDesignPaperLightButton}"
+                                        Content="添加操作">
+
+                                    </Button>
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button
+                                <StackPanel Orientation="Horizontal">
+
+                                    <Button
                                     Style="{StaticResource MaterialDesignPaperButton}"
                                     Content="编辑"/>
+
+                                    <TextBlock Text="  " />
+
+                                    <Button
+                                    Style="{StaticResource MaterialDesignPaperLightButton}"
+                                    Content="删除"/>
+
+                                </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button
-                                    Style="{StaticResource MaterialDesignPaperLightButton}"
-                                    Content="删除"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
 
+        <Button
+            Margin="691,453,152,95"
+            Content="导入配置"
+            materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5"
+            Style="{StaticResource MaterialDesignRaisedButton}"/>
+
+        <Button 
+            Margin="800,453,42,95"
+            Content="导出配置"
+            materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            />
+
+        <Button
+            Content="开始 (左Ctrl)"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            
+            Margin="53,453,765,95"/>
+
+        <Button
+            Content="修改快捷键"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            Margin="186,453,636,95" />
+
+        <materialDesign:DialogHost>
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="16">
+
+                    <StackPanel Orientation="Horizontal" Margin="15">
+                        <StackPanel Margin="0,0,15,0">
+                            <TextBlock Text="操作模式"/>
+                            <ComboBox Width="100">
+                                <ComboBoxItem Content="点击"/>
+                                <ComboBoxItem Content="长按"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Margin="15,0,15,0">
+                            <TextBlock Text="按键选择"/>
+                            <ComboBox Width="100">
+                                <ComboBoxItem Content="左键"/>
+                                <ComboBoxItem Content="右键"/>
+                                <ComboBoxItem Content="键盘按键"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Margin="15,0,0,0">
+                            <TextBlock Text="请输入按键"/>
+                            <TextBox Width="100"/>
+                        </StackPanel>
+                        
+                    </StackPanel>
+
+                    <StackPanel Margin="15">
+                        <TextBlock Text="点击速度"/>
+                        <TextBox Width="100" HorizontalAlignment="Left"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="15">
+                        <StackPanel Margin="0,0,15,0">
+                            <TextBlock Text="持续时间"/>
+                            <TextBox Width="100"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="15,0,15,0">
+                            <TextBlock Text="重新开始时间"/>
+                            <TextBox Width="100"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="15,0,0,0">
+                            <TextBlock Text="开始时间"/>
+                            <TextBox Width="100"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <Button
+                            Margin="0,8,8,0"
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                            Content="ACCEPT"
+                            IsDefault="True"
+                            Style="{StaticResource MaterialDesignFlatButton}">
+
+                        </Button>
+                        <Button
+                            Margin="0,8,8,0" 
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                            Content="CANCEL"
+                            IsCancel="True"
+                            Style="{StaticResource MaterialDesignFlatButton}">
+                        </Button>
+
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
     </Grid>
 </Window>
