@@ -94,6 +94,11 @@ namespace Minecraft_AFK_GUI
             Hotkey.Regist(SelfWindowHandle, HotkeyModifiers.MOD_CONTROL | HotkeyModifiers.MOD_NOREPEAT, Key.M, GetWindowHandle);
         }
 
+        private void AddOperation(object sender, RoutedEventArgs e)
+        {
+            this.set.AddOperationDialogOpening = "True";
+        }
+
         //测试快捷键注册
         protected override void OnSourceInitialized(EventArgs e)
         {
