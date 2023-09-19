@@ -7,19 +7,23 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 
 namespace Minecraft_AFK_GUI
 {
     public class Settings : INotifyPropertyChanged
     {
-        private string _WindowTitleName, _WindowHandleButtonState, _AddOperationDialogOpening;
+        private string _WindowTitleName;
+        private bool _WindowHandleButtonState, _AddOperationDialogOpening, _ErrorDialogOpening;
+
         //public List<OperationPageSource> Source;
         public ObservableCollection<OperationPageSource> Source;
         public Settings()
         {
             _WindowTitleName = "";
-            _WindowHandleButtonState = "False";
-            _AddOperationDialogOpening = "False";
+            _WindowHandleButtonState = false;
+            _AddOperationDialogOpening = false;
+            _ErrorDialogOpening = false;
             //Source = new List<OperationPageSource>();
             Source = new ObservableCollection<OperationPageSource>();
         }
@@ -36,7 +40,8 @@ namespace Minecraft_AFK_GUI
                 }
             }
         }
-        public string WindowHandleButtonState
+
+        public bool WindowHandleButtonState
         {
             get { return _WindowHandleButtonState; }
             set
@@ -49,7 +54,7 @@ namespace Minecraft_AFK_GUI
             }
         }
 
-        public string AddOperationDialogOpening
+        public bool AddOperationDialogOpening
         {
             get { return _AddOperationDialogOpening; }
             set
@@ -58,6 +63,19 @@ namespace Minecraft_AFK_GUI
                 {
                     _AddOperationDialogOpening = value;
                     OnPropertyChanged(nameof(AddOperationDialogOpening));
+                }
+            }
+        }
+
+        public bool ErrorDialogOpening
+        {
+            get { return _ErrorDialogOpening; }
+            set
+            {
+                if (PropertyChanged != null)
+                {
+                    _ErrorDialogOpening = value;
+                    OnPropertyChanged(nameof(ErrorDialogOpening));
                 }
             }
         }
@@ -72,22 +90,47 @@ namespace Minecraft_AFK_GUI
 
     public class OperationPageSource
     {
-        public OperationPageSource()
+        public OperationPageSource(string _OperationMode = "", string _KeySelection = "", string _Speed = "", string _StartTime = "", string _Duratrion = "", string _RestartTime = "")
         {
-            //test
-            Number = 1;
-            OperationMode = "阿巴阿巴";
-            KeySelection = Speed = StartTime = Duration = RestartTime = "23333333333";
-            IsAllSelected = "True";
+            OperationMode = _OperationMode;
+            KeySelection = _KeySelection;
+            Speed = _Speed;
+            StartTime = _StartTime;
+            Duration = _Duratrion;
+            RestartTime = _RestartTime;
         }
 
-        public int Number { set; get; }
-        public string IsAllSelected { set; get; }
         public string OperationMode { set; get; }
         public string KeySelection { set; get; }
         public string Speed { set; get; }
         public string StartTime { set; get; }
         public string Duration { set; get; }
         public string RestartTime { set; get; }
+    }
+
+    public class IsKeySelectionEnabledConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return value.ToString() == "键盘按键";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class IsSpeedInputEnabledConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return value.ToString() == "点击";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

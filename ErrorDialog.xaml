@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="Minecraft_AFK_GUI.ErrorDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Minecraft_AFK_GUI"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" >
+    <Grid>
+        <materialDesign:DialogHost IsOpen="{Binding ErrorDialogOpening}">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel>
+
+                    <StackPanel
+                        HorizontalAlignment="Center">
+                        <TextBlock Text="出现错误，请检查设置！"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        HorizontalAlignment="Right"
+                       Orientation="Horizontal">
+                        <Button
+                            Margin="10,8,8,0" 
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                            Content="确认"
+                            IsCancel="True"
+                            Style="{StaticResource MaterialDesignPaperLightButton}">
+                        </Button>
+                    </StackPanel>
+                
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    </Grid>
+</UserControl>

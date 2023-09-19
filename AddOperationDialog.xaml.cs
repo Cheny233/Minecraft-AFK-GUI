@@ -24,5 +24,17 @@ namespace Minecraft_AFK_GUI
         {
             InitializeComponent();
         }
+
+        private void AddOperation(object sender, RoutedEventArgs e)
+        {
+            if (!SpeedSelection.IsEnabled)
+                SpeedSelection.Text = string.Empty;
+
+            string _KeySelection = KeyModeSelection.SelectedItem == null ? "" : KeyModeSelection.SelectedItem.ToString();
+            if (KeySelection.IsEnabled)
+                _KeySelection = KeySelection.Text;
+
+            //string _OperationMod, string _KeySelection, string _Speed, string _StartTime, string _Duratrion, string _RestartTime
+        }
     }
 }

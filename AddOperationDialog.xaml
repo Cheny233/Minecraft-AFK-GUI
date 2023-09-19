@@ -6,6 +6,11 @@
              xmlns:local="clr-namespace:Minecraft_AFK_GUI"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" >
+    <UserControl.Resources>
+        <local:IsKeySelectionEnabledConverter x:Key="IsKeySelectionEnabledConverter"/>
+        <local:IsSpeedInputEnabledConverter x:Key="IsSpeedInputEnabledConverter"/>
+    </UserControl.Resources>
+    
     <Grid>
         <materialDesign:DialogHost IsOpen="{Binding AddOperationDialogOpening}">
             <materialDesign:DialogHost.DialogContent>
@@ -14,7 +19,7 @@
                     <StackPanel Orientation="Horizontal" Margin="25">
                         <StackPanel Margin="0,0,15,0">
                             <TextBlock Text="操作模式" Margin="0,0,0,10"/>
-                            <ComboBox Width="125">
+                            <ComboBox Width="125" Name="OperationModeSelection">
                                 <ComboBoxItem Content="点击"/>
                                 <ComboBoxItem Content="长按"/>
                             </ComboBox>
@@ -22,39 +27,41 @@
 
                         <StackPanel Margin="15,0,15,0">
                             <TextBlock Text="按键选择" Margin="0,0,0,10"/>
-                            <ComboBox Width="125">
+                            <ComboBox Width="125" Name="KeyModeSelection">
                                 <ComboBoxItem Content="左键"/>
                                 <ComboBoxItem Content="右键"/>
                                 <ComboBoxItem Content="键盘按键"/>
                             </ComboBox>
                         </StackPanel>
 
-                        <StackPanel Margin="15,0,0,0">
-                            <TextBlock Text="请输入按键" Margin="0,0,0,10"/>
-                            <TextBox Width="125"/>
+                        <StackPanel Margin="15,0,0,0"
+                                    IsEnabled="{Binding ElementName=KeyModeSelection, Path=SelectedItem.Content, Converter={StaticResource IsKeySelectionEnabledConverter}, FallbackValue=False}">
+                            <TextBlock Text="请输入按键" Margin="0,0,0,10" Name="KeySelection"/>
+                            <TextBox Width="125" MaxLength="1"/>
                         </StackPanel>
 
                     </StackPanel>
 
-                    <StackPanel Margin="25">
+                    <StackPanel Margin="25"
+                                IsEnabled="{Binding ElementName=OperationModeSelection, Path=SelectedItem.Content, Converter={StaticResource IsSpeedInputEnabledConverter}, FallbackValue=False}">
                         <TextBlock Text="点击速度 (秒)" Margin="0,0,0,10"/>
-                        <TextBox Width="125" HorizontalAlignment="Left"/>
+                        <TextBox Width="125" HorizontalAlignment="Left" Name="SpeedSelection"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="25">
                         <StackPanel Margin="0,0,15,0">
                             <TextBlock Text="持续时间 (秒)" Margin="0,0,0,10"/>
-                            <TextBox Width="125"/>
+                            <TextBox Width="125" Name="DurationSelection"/>
                         </StackPanel>
 
                         <StackPanel Margin="15,0,15,0">
                             <TextBlock Text="重新开始时间 (秒)" Margin="0,0,0,10"/>
-                            <TextBox Width="125"/>
+                            <TextBox Width="125" Name="RestartTimeSeletion"/>
                         </StackPanel>
 
                         <StackPanel Margin="15,0,0,0">
                             <TextBlock Text="开始时间 (秒)" Margin="0,0,0,10"/>
-                            <TextBox Width="125"/>
+                            <TextBox Width="125" Name="StartTimeSelection"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -63,6 +70,7 @@
                         Orientation="Horizontal">
                         <Button
                             Margin="10,8,8,0"
+                            Click="AddOperation"
                             Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                             Content="确认添加"
                             IsDefault="True"
@@ -75,8 +83,8 @@
                             IsCancel="True"
                             Style="{StaticResource MaterialDesignPaperLightButton}">
                         </Button>
-
                     </StackPanel>
+                    
                 </StackPanel>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>

@@ -17,6 +17,7 @@ using MaterialDesignColors;
 using MaterialDesignThemes.Wpf;
 using System.Windows.Interop;
 using System.Globalization;
+using System.Windows.Media.Animation;
 
 namespace Minecraft_AFK_GUI
 {
@@ -32,6 +33,7 @@ namespace Minecraft_AFK_GUI
         public MainWindow()
         {
             InitializeComponent();
+
             this.DataContext = set;
 
             OperationPage.ItemsSource = set.Source;
@@ -87,16 +89,17 @@ namespace Minecraft_AFK_GUI
         //获取窗口句柄
         private void WindowHandleButton(object sender, RoutedEventArgs e)
         {
-            this.set.WindowHandleButtonState = "True";
+            this.set.WindowHandleButtonState = true;
             this.set.WindowTitleName = "";
             TargetWindowHandle = IntPtr.Zero;
 
             Hotkey.Regist(SelfWindowHandle, HotkeyModifiers.MOD_CONTROL | HotkeyModifiers.MOD_NOREPEAT, Key.M, GetWindowHandle);
         }
 
-        private void AddOperation(object sender, RoutedEventArgs e)
+        //打开配置添加窗口
+        private void OpenAddOperation(object sender, RoutedEventArgs e)
         {
-            this.set.AddOperationDialogOpening = "True";
+            this.set.AddOperationDialogOpening = true;
         }
 
         //测试快捷键注册

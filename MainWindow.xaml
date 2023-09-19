@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minecraft_AFK_GUI"
-        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        materialDesign:TransitionAssist.DisableTransitions="True" 
         WindowStartupLocation="CenterScreen"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{x:Null}"
@@ -108,7 +109,7 @@
                                     <TextBlock Text="     "/>
 
                                     <Button
-                                        Click="AddOperation"
+                                        Click="OpenAddOperation"
                                         Style="{StaticResource MaterialDesignPaperLightButton}"
                                         Content="添加操作">
 
@@ -164,6 +165,7 @@
             Style="{StaticResource MaterialDesignRaisedLightButton}"
             Margin="186,453,636,95" />
 
-        <local:AddOperationDialog />
+        <local:AddOperationDialog/>
+        <local:ErrorDialog/>
     </Grid>
 </Window>
