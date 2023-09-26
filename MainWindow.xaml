@@ -130,7 +130,8 @@
 
                                     <Button
                                     Style="{StaticResource MaterialDesignPaperLightButton}"
-                                    Content="删除"/>
+                                    Content="删除"
+                                    Click="DeleteOperation"/>
 
                                 </StackPanel>
                             </DataTemplate>
@@ -152,6 +153,7 @@
             Content="导出配置"
             materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5"
             Style="{StaticResource MaterialDesignRaisedButton}"
+            Click="ExportJson"
             />
 
         <Button

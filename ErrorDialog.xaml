@@ -9,18 +9,18 @@
     <Grid>
         <materialDesign:DialogHost IsOpen="{Binding ErrorDialogOpening}">
             <materialDesign:DialogHost.DialogContent>
-                <StackPanel>
+                <StackPanel Margin="15">
 
                     <StackPanel
                         HorizontalAlignment="Center">
-                        <TextBlock Text="出现错误，请检查设置！"/>
+                        <TextBlock Margin="15" Text="出现错误，请检查设置！"/>
                     </StackPanel>
 
                     <StackPanel
                         HorizontalAlignment="Right"
                        Orientation="Horizontal">
                         <Button
-                            Margin="10,8,8,0" 
+                            Margin="10,5,5,0" 
                             Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                             Content="确认"
                             IsCancel="True"

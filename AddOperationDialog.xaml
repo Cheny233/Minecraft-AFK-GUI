@@ -36,8 +36,8 @@
 
                         <StackPanel Margin="15,0,0,0"
                                     IsEnabled="{Binding ElementName=KeyModeSelection, Path=SelectedItem.Content, Converter={StaticResource IsKeySelectionEnabledConverter}, FallbackValue=False}">
-                            <TextBlock Text="请输入按键" Margin="0,0,0,10" Name="KeySelection"/>
-                            <TextBox Width="125" MaxLength="1"/>
+                            <TextBlock Text="请输入按键" Margin="0,0,0,10"/>
+                            <TextBox Width="125" MaxLength="1" Name="KeySelection"/>
                         </StackPanel>
 
                     </StackPanel>
@@ -50,18 +50,18 @@
 
                     <StackPanel Orientation="Horizontal" Margin="25">
                         <StackPanel Margin="0,0,15,0">
+                            <TextBlock Text="开始时间 (秒)" Margin="0,0,0,10"/>
+                            <TextBox Width="125" Name="StartTimeSelection"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="15,0,15,0">
                             <TextBlock Text="持续时间 (秒)" Margin="0,0,0,10"/>
                             <TextBox Width="125" Name="DurationSelection"/>
                         </StackPanel>
 
-                        <StackPanel Margin="15,0,15,0">
+                        <StackPanel Margin="15,0,0,0">
                             <TextBlock Text="重新开始时间 (秒)" Margin="0,0,0,10"/>
                             <TextBox Width="125" Name="RestartTimeSeletion"/>
-                        </StackPanel>
-
-                        <StackPanel Margin="15,0,0,0">
-                            <TextBlock Text="开始时间 (秒)" Margin="0,0,0,10"/>
-                            <TextBox Width="125" Name="StartTimeSelection"/>
                         </StackPanel>
                     </StackPanel>
 

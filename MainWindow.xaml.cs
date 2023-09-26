@@ -18,6 +18,8 @@ using MaterialDesignThemes.Wpf;
 using System.Windows.Interop;
 using System.Globalization;
 using System.Windows.Media.Animation;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Minecraft_AFK_GUI
 {
@@ -26,7 +28,7 @@ namespace Minecraft_AFK_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        Settings set = new Settings();
+        public Settings set = new Settings();
 
         IntPtr SelfWindowHandle, TargetWindowHandle;
 
@@ -100,6 +102,20 @@ namespace Minecraft_AFK_GUI
         private void OpenAddOperation(object sender, RoutedEventArgs e)
         {
             this.set.AddOperationDialogOpening = true;
+        }
+
+        //删除选中配置
+        private void DeleteOperation(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            OperationPageSource ops=button.DataContext as OperationPageSource;
+            set.Source.Remove(ops);
+        }
+
+        //导出配置
+        private void ExportJson(object sender, RoutedEventArgs e)
+        {
+
         }
 
         //测试快捷键注册
