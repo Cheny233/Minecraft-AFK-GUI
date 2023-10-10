@@ -13,17 +13,19 @@ namespace Minecraft_AFK_GUI
 {
     public class Settings : INotifyPropertyChanged
     {
-        private string _WindowTitleName;
-        private bool _WindowHandleButtonState, _AddOperationDialogOpening, _ErrorDialogOpening;
+        private string _WindowTitleName, _ExportJsonPath;
+        private bool _WindowHandleButtonState, _AddOperationDialogOpening, _ErrorDialogOpening, _ExportJsonDialogOpening;
 
         //public List<OperationPageSource> Source;
         public ObservableCollection<OperationPageSource> Source;
         public Settings()
         {
             _WindowTitleName = "";
+            _ExportJsonPath = "";
             _WindowHandleButtonState = false;
             _AddOperationDialogOpening = false;
             _ErrorDialogOpening = false;
+            _ExportJsonDialogOpening = false;
             //Source = new List<OperationPageSource>();
             Source = new ObservableCollection<OperationPageSource>();
         }
@@ -37,6 +39,19 @@ namespace Minecraft_AFK_GUI
                 {
                     _WindowTitleName = value;
                     OnPropertyChanged(nameof(WindowTitleName));
+                }
+            }
+        }
+
+        public string ExportJsonPath
+        {
+            get { return _ExportJsonPath; }
+            set
+            {
+                if (PropertyChanged != null)
+                {
+                    _ExportJsonPath = value;
+                    OnPropertyChanged(nameof(ExportJsonPath));
                 }
             }
         }
@@ -76,6 +91,19 @@ namespace Minecraft_AFK_GUI
                 {
                     _ErrorDialogOpening = value;
                     OnPropertyChanged(nameof(ErrorDialogOpening));
+                }
+            }
+        }
+
+        public bool ExportJsonDialogOpening
+        {
+            get { return _ExportJsonDialogOpening; }
+            set
+            {
+                if (PropertyChanged != null)
+                {
+                    _ExportJsonDialogOpening = value;
+                    OnPropertyChanged(nameof(ExportJsonDialogOpening));
                 }
             }
         }

@@ -15,12 +15,18 @@
     <Compile Update="ErrorDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ExportJsonDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="AddOperationDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ErrorDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ExportJsonDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">

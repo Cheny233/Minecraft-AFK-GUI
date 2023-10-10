@@ -20,6 +20,8 @@ using System.Globalization;
 using System.Windows.Media.Animation;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using Microsoft.Win32;
+using System.IO;
 
 namespace Minecraft_AFK_GUI
 {
@@ -115,7 +117,23 @@ namespace Minecraft_AFK_GUI
         //导出配置
         private void ExportJson(object sender, RoutedEventArgs e)
         {
+            set.ExportJsonDialogOpening = true;
+        }
 
+        //导入配置
+        private void ImportJson(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "配置文件(*.json)|*.json";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string json = File.ReadAllText(openFileDialog.FileName);
+                List<OperationPageSource> newPageSourse = JsonConvert.DeserializeObject<List<OperationPageSource>>(json);
+
+                foreach (OperationPageSource pageSourse in newPageSourse)
+                    set.Source.Add(pageSourse);
+            }
         }
 
         //测试快捷键注册

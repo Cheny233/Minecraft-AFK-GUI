@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="Minecraft_AFK_GUI.ExportJsonDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Minecraft_AFK_GUI"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <Grid>
+        <materialDesign:DialogHost IsOpen="{Binding ExportJsonDialogOpening}">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="16">
+
+                    <StackPanel
+                        Margin="10,25,10,0"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Text="文件夹路径："
+                            Margin="0,10,10,0"/>
+                        <Button
+                            Margin="10,5,0,10"
+                            Style="{StaticResource MaterialDesignPaperLightButton}"
+                            Content="选择文件夹"
+                            Click="SelectFolder"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        Margin="10,0,10,50"
+                        HorizontalAlignment="Left">
+                        <TextBox Width="400" Text="{Binding ExportJsonPath}"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <Button
+                            Margin="10,8,8,0"
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                            Click="ExportJson"
+                            Content="确认导出"
+                            IsDefault="True"
+                            Style="{StaticResource MaterialDesignPaperLightButton}">
+                        </Button>
+                        <Button
+                            Margin="10,8,8,0" 
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                            Content="取消"
+                            IsCancel="True"
+                            Style="{StaticResource MaterialDesignPaperLightButton}">
+                        </Button>
+                    </StackPanel>
+
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    </Grid>
+</UserControl>
